@@ -21,6 +21,7 @@
     <modules>
         <module>kgboot-web</module>
         <module>kgboot-common</module>
+        <module>kgboot-core</module>
         <module>kgboot-dao</module>
         <module>kgboot-util</module>
         <module>kgboot-api</module>
@@ -37,6 +38,12 @@
             <dependency>
                 <groupId>com.gjie</groupId>
                 <artifactId>kgboot-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.gjie</groupId>
+                <artifactId>kgboot-core</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
@@ -94,6 +101,25 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>1.2.83</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>2.7.8</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+                <version>2.7.5</version>
+            </dependency>
+
+            <!-- 加上这个才能辨认到log4j2.yml文件 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>2.9.6</version>
             </dependency>
 
         </dependencies>

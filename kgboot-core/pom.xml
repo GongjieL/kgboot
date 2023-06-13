@@ -9,14 +9,32 @@
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gjie</groupId>
-	<artifactId>kgboot-common</artifactId>
+	<artifactId>kgboot-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kgboot-common</name>
-	<description>常量、枚举、异常定义</description>
+	<description>kgboot-core</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.gjie</groupId>
+			<artifactId>kgboot-dao</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.gjie</groupId>
+			<artifactId>kgboot-util</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gjie</groupId>
+			<artifactId>kgboot-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gjie</groupId>
+			<artifactId>kgboot-common</artifactId>
+		</dependency>
 
 	</dependencies>
 

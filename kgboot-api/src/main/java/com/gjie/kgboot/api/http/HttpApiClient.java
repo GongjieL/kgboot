@@ -1,9 +1,13 @@
 package com.gjie.kgboot.api.http;
 
 import com.alibaba.fastjson.JSON;
-import com.gjie.kgboot.api.http.strategy.analysisresp.AbstractRespAnalysis;
-import com.gjie.kgboot.api.http.strategy.analysisresp.RespAnalysisFactory;
+import com.gjie.kgboot.api.http.strategy.resp.AbstractRespProcessor;
+import com.gjie.kgboot.api.http.strategy.resp.RespProcessorFactory;
+import com.gjie.kgboot.common.constant.ErrorEnum;
+import com.gjie.kgboot.common.exception.BaseException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -14,23 +18,36 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @Service
-public class HttpApiClient<Req, Resp> {
+public class HttpApiClient {
     @Autowired
     private RestTemplate restTemplate;
 
 
-    public HttpBaseResponse<Resp> getHttpResponse(HttpBaseRequest<Req> request) {
+    private static Logger logger = LogManager.getLogger(HttpApiClient.class);
+
+    public HttpBaseResponse getHttpResponse(HttpBaseRequest request) {
         String url = buildUrl(request.getUrl(), request.getUrlVariables());
         String param = request.getParamData() == null ? null :
                 JSON.toJSONString(request.getParamData());
         //以string接收
         HttpEntity<String> httpEntity = new HttpEntity(param, request.getHeaders());
         ResponseEntity<String> response =
-                restTemplate.exchange(url, request.getHttpMethod(), httpEntity, String.class);
+                null;
+        try {
+            response = restTemplate.exchange(url, request.getHttpMethod(), httpEntity, String.class);
+        } catch (Exception e) {
+            logger.error("请求外部接口失败:", e);
+            throw new BaseException(ErrorEnum.PARAM_ERROR);
+        } finally {
+            logger.info(StringUtils.join("请求外部接口:" + url + "，请求:", param, "响应:", JSON.toJSONString(response)));
+        }
         String body = response.getBody();
         //策略直接解析
-        AbstractRespAnalysis respAnalysis = RespAnalysisFactory.getRespAnalysis(request.getAnalysisRespCode());
-        HttpBaseResponse<Resp> httpBaseResponse = respAnalysis.analysisResp(body);
+        AbstractRespProcessor respProcessor = RespProcessorFactory.getRespProcessor(request.getAnalysisRespCode());
+        if (respProcessor == null) {
+            throw  new BaseException(ErrorEnum.NO_EXISTS_HTTP_RESP_PROCESSOR);
+        }
+        HttpBaseResponse httpBaseResponse = respProcessor.analysisResp(body);
         return httpBaseResponse;
     }
 

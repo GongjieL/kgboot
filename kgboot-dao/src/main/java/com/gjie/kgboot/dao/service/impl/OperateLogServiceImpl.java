@@ -14,7 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class OperateLogServiceImpl extends ServiceImpl<OperateLogMapper, OperateLog>
     implements OperateLogService{
-
+        public String test(){
+            if(1==1){
+                throw new RuntimeException("就是异常了");
+            }
+            return "";
+        }
 }
 
 

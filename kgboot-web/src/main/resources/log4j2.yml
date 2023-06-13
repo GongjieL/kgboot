@@ -1,0 +1,132 @@
+Configuration:
+  status: warn
+
+  Properties: # 定义全局变量
+    Property: # 缺省配置（用于开发环境）。其他环境需要在VM参数中指定，如下：
+      #测试：-Dlog.level.console=warn -Dlog.level.xjj=trace
+      #生产：-Dlog.level.console=warn -Dlog.level.xjj=info
+      - name: log.level.console
+        value: trace
+      - name: log.level.xjj
+        value: trace
+      - name: log.path
+        value: logs
+      - name: project.name
+        value: kgboot
+
+  Appenders:
+    Console:  #输出到控制台
+      name: CONSOLE
+      target: SYSTEM_OUT
+      ThresholdFilter:
+        level: ${sys:log.level.console} # “sys:”表示：如果VM参数中没指定这个变量值，则使用本文件中定义的缺省全局变量值
+        onMatch: ACCEPT
+        onMismatch: DENY
+      PatternLayout:
+        pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
+
+    RollingFile: # 输出到文件，超过128MB归档
+      - name: APP_DEFAULT_INFO
+        ignoreExceptions: false
+        fileName: ${log.path}/${project.name}-default.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L)[%X{trace_id}] - %m%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000
+
+      - name: EXCEPTION
+        ignoreExceptions: false
+        fileName: ${log.path}/common-error.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L)[%X{trace_id}] - %m%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000
+
+      - name: WEB_REQUEST
+        ignoreExceptions: false
+        fileName: ${log.path}/web_request.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L)[%X{trace_id}] - %m%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000
+
+      - name: MYBATIS_SQL
+        ignoreExceptions: false
+        fileName: ${log.path}/mybatis_sql.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L)[%X{trace_id}] - %m%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 1000
+
+
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: CONSOLE
+        - ref: ROLLING_FILE
+    Logger:
+      - name: com.gjie.kgboot.api  #api error
+        additivity: false
+        level: error
+        AppenderRef:
+          - ref: EXCEPTION
+
+      - name: com.gjie.kgboot.dao  #dao error
+        additivity: false
+        level: error
+        AppenderRef:
+          - ref: EXCEPTION
+
+      - name: com.gjie.kgboot.common  #common error
+        additivity: false
+        level: error
+        AppenderRef:
+          - ref: EXCEPTION
+
+      - name: com.gjie.kgboot.util  #util error
+        additivity: false
+        level: error
+        AppenderRef:
+          - ref: EXCEPTION
+
+      - name: com.gjie.kgboot.web  #web error
+        additivity: false
+        level: error
+        AppenderRef:
+          - ref: EXCEPTION
+
+      - name: com.gjie.kgboot  #全局info
+        additivity: false
+        level: info
+        AppenderRef:
+          - ref: APP_DEFAULT_INFO
+
+      - name: com.gjie.kgboot.dao # 指定Dao层项目路径，并打印sql执行日志
+        additivity: false
+        level: debug   #
+        AppenderRef:
+          - ref: MYBATIS_SQL
+
+      - name: WEB_LOG
+        additivity: false
+        level: info   #
+        AppenderRef:
+          - ref: WEB_REQUEST
