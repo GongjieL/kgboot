@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+kgboot-dao/src/main/resources/application-mysql-data.properties
+
+
+logs
