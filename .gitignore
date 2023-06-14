@@ -32,7 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-/**/application-mysql-data.properties
-
 
 logs
+
+kgboot-dao/src/main/resources/application-mysql-data.properties
