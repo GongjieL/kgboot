@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySource;
         "classpath:application-common.properties",
         "classpath:application-util.properties",
         "classpath:application-api.properties",
+        "classpath:application-mysql-data.properties",
         "classpath:application-dao.properties"})
 @MapperScan({"com.gjie.kgboot.dao"})
 public class KgbootWebApplication {
