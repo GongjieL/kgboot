@@ -37,6 +37,15 @@ Configuration:
             size: "128 MB"
         DefaultRolloverStrategy:
           max: 1000
+        Filters:
+          ThresholdFilter:
+            - level: error # 日志级别
+              onMatch: DENY
+              onMismatch: NEUTRAL
+            - level: info
+              onMatch: ACCEPT
+              onMismatch: DENY
+
 
       - name: EXCEPTION
         ignoreExceptions: false
@@ -49,6 +58,11 @@ Configuration:
             size: "128 MB"
         DefaultRolloverStrategy:
           max: 1000
+        Filters:
+          ThresholdFilter:
+            - level: error
+              onMatch: ACCEPT
+              onMismatch: DENY
 
       - name: WEB_REQUEST
         ignoreExceptions: false
@@ -73,6 +87,14 @@ Configuration:
             size: "128 MB"
         DefaultRolloverStrategy:
           max: 1000
+        Filters:
+          ThresholdFilter:
+            - level: error # 日志级别
+              onMatch: DENY
+              onMismatch: NEUTRAL
+            - level: info
+              onMatch: ACCEPT
+              onMismatch: DENY
 
 
 
@@ -83,17 +105,25 @@ Configuration:
         - ref: CONSOLE
         - ref: ROLLING_FILE
     Logger:
+#      - name: com.gjie.kgboot.api #全局info
+#        additivity: false
+#        level: info
+#        AppenderRef:
+#          - ref: APP_DEFAULT_INFO
+
       - name: com.gjie.kgboot.api  #api error
         additivity: false
-        level: error
+        level: info
         AppenderRef:
           - ref: EXCEPTION
+          - ref: APP_DEFAULT_INFO
 
-      - name: com.gjie.kgboot.dao  #dao error
-        additivity: false
-        level: error
-        AppenderRef:
-          - ref: EXCEPTION
+
+#      - name: com.gjie.kgboot.dao  #dao error
+#        additivity: false
+#        level: error
+#        AppenderRef:
+#          - ref: EXCEPTION
 
       - name: com.gjie.kgboot.common  #common error
         additivity: false
@@ -113,17 +143,12 @@ Configuration:
         AppenderRef:
           - ref: EXCEPTION
 
-      - name: com.gjie.kgboot  #全局info
-        additivity: false
-        level: info
-        AppenderRef:
-          - ref: APP_DEFAULT_INFO
-
       - name: com.gjie.kgboot.dao # 指定Dao层项目路径，并打印sql执行日志
         additivity: false
-        level: debug   #
+        level: info   #
         AppenderRef:
           - ref: MYBATIS_SQL
+          - ref: EXCEPTION
 
       - name: WEB_LOG
         additivity: false

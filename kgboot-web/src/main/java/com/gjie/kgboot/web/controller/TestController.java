@@ -3,6 +3,9 @@ package com.gjie.kgboot.web.controller;
 import com.gjie.kgboot.api.http.HttpApiClient;
 import com.gjie.kgboot.api.http.HttpBaseRequest;
 import com.gjie.kgboot.api.http.HttpBaseResponse;
+import com.gjie.kgboot.api.kafka.KafkaProducerClient;
+import com.gjie.kgboot.dao.service.OperateLogService;
+import com.gjie.kgboot.dao.service.impl.OperateLogServiceImpl;
 import com.gjie.kgboot.web.response.BaseWebResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -21,10 +24,18 @@ public class TestController {
     @Autowired
     private HttpApiClient httpApiClient;
 
+    @Autowired
+    private KafkaProducerClient kafkaProducerClient;
+
+    @Autowired
+    private OperateLogServiceImpl operateLogService;
+
 
     @GetMapping(value = "/abc")
     public BaseWebResponse<String> test(@RequestParam String abc) {
+        kafkaProducerClient.sendMessageAsync("test-1",null,null,"test abc");
         HttpBaseRequest<Map<String, String>> request = new HttpBaseRequest<>();
+        operateLogService.test();
         request.setUrl("http://43.135.135.141:8080/openai/auth");
         request.setHttpMethod(HttpMethod.GET);
         Map<String, Object> data = new HashMap<>();

@@ -34,6 +34,7 @@ public class WebControllerAspect {
 
     /**
      * controller异常封装、接口耗时统计
+     *
      * @param proceedingJoinPoint
      * @return
      */
@@ -41,7 +42,7 @@ public class WebControllerAspect {
     public BaseWebResponse aroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
         long start = System.currentTimeMillis();
         try {
-            return (BaseWebResponse)proceedingJoinPoint.proceed();
+            return (BaseWebResponse) proceedingJoinPoint.proceed();
         } catch (Throwable t) {
             logger.error("访问接口失败,入参:" + JSON.toJSONString(proceedingJoinPoint.getArgs()), t);
             if (t instanceof BaseException) {
@@ -52,7 +53,7 @@ public class WebControllerAspect {
             String path = StringUtils.EMPTY;
             try {
                 path = parseControllerPath(proceedingJoinPoint);
-                LogManager.getLogger(WEB_LOG).info(StringUtils.join("接口访问耗时:", path, ":", System.currentTimeMillis() - start));
+                LogManager.getLogger(WEB_LOG).info(StringUtils.join("接口路径:", path, "，耗时:", System.currentTimeMillis() - start, "ms"));
             } catch (Exception e) {
                 throw new BaseException(ErrorEnum.UN_KNOWN_ERROR);
             }
