@@ -41,7 +41,7 @@ public class TestController {
         Map<String, Object> data = new HashMap<>();
         data.put("wd", "%E8%A7%A3%E6%9E%90");
         request.setUrlVariables(data);
-        request.setAnalysisRespCode("common2");
+        request.setAnalysisRespCode("common");
         HttpBaseResponse<String> httpResponse = httpApiClient.getHttpResponse(request);
 
         return BaseWebResponse.<String>builder()

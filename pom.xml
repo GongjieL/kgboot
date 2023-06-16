@@ -61,7 +61,7 @@
 
             <dependency>
                 <groupId>com.gjie</groupId>
-                <artifactId>kgboot-api</artifactId>
+                <artifactId>kgboot-api-spring-boot-starter</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <!--mybatis-plus-->

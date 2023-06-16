@@ -1,4 +1,4 @@
-package com.gjie.kgboot.api.http.strategy.resp;
+package com.gjie.kgboot.api.strategy.http;
 
 import java.util.HashMap;
 import java.util.Map;

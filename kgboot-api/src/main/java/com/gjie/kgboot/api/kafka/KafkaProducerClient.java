@@ -1,5 +1,7 @@
 package com.gjie.kgboot.api.kafka;
 
+import com.gjie.kgboot.api.config.APICommonProperties;
+import com.gjie.kgboot.api.config.KafkaClientProperties;
 import com.gjie.kgboot.common.constant.CommonConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,21 +9,26 @@ import org.slf4j.MDC;
 import org.springframework.kafka.core.KafkaOperations;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import javax.annotation.Resource;
 
-@Service
+/**
+ * kafka发送消息客户端
+ */
 public class KafkaProducerClient {
 
-    private static Logger logger = LogManager.getLogger(KafkaProducerClient.class);
+    private static Logger logger = LogManager.getLogger("KAFKA_API_LOG");
     @Resource
     private KafkaTemplate<String, String> kafkaTemplate;
 
     @Resource
     private KafkaTemplate<String, String> kafkaTemplateWithTransaction;
+
+    @Resource
+    private APICommonProperties apiCommonProperties;
+
 
     /**
      * 发送消息（异步）
@@ -32,13 +39,15 @@ public class KafkaProducerClient {
     public void sendMessageAsync(String topic, Integer partition, String partitionKey, String message) {
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, partition, partitionKey, message);
         //获取traceId
-        String traceId = MDC.get(CommonConstants.LOG_TRACE_ID);
+        String traceIdKey = apiCommonProperties.getTraceIdKey() == null ?
+                CommonConstants.LOG_TRACE_ID : apiCommonProperties.getTraceIdKey();
+        String traceId = MDC.get(traceIdKey);
         //添加回调
         future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
             @Override
             public void onFailure(Throwable throwable) {
                 //traceId
-                MDC.put(CommonConstants.LOG_TRACE_ID, traceId);
+                MDC.put(traceIdKey, traceId);
                 //发送消息失败
                 logger.error("sendMessageAsync failure! topic : {}, message: {}", topic, message);
             }
@@ -46,7 +55,7 @@ public class KafkaProducerClient {
             @Override
             public void onSuccess(SendResult<String, String> stringStringSendResult) {
                 //traceId
-                MDC.put(CommonConstants.LOG_TRACE_ID, traceId);
+                MDC.put(traceIdKey, traceId);
                 logger.info("sendMessageAsync success! topic: {}, message: {}", topic, message);
             }
         });

@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
     </parent>
     <groupId>com.gjie</groupId>
-    <artifactId>kgboot-api</artifactId>
+    <artifactId>kgboot-api-spring-boot-starter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>kgboot-api</name>
     <description>kgboot-api</description>
@@ -17,6 +17,12 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

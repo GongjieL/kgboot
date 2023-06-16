@@ -10,7 +10,6 @@ import org.springframework.kafka.annotation.EnableKafka;
 @PropertySource({"classpath:application.properties",
         "classpath:application-common.properties",
         "classpath:application-util.properties",
-        "classpath:application-api.properties",
         "classpath:application-mysql-data.properties",
         "classpath:application-dao.properties"})
 @MapperScan({"com.gjie.kgboot.dao"})

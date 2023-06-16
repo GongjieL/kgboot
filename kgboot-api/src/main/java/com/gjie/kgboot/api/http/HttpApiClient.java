@@ -1,29 +1,29 @@
 package com.gjie.kgboot.api.http;
 
 import com.alibaba.fastjson.JSON;
-import com.gjie.kgboot.api.http.strategy.resp.AbstractRespProcessor;
-import com.gjie.kgboot.api.http.strategy.resp.RespProcessorFactory;
+import com.gjie.kgboot.api.strategy.http.AbstractRespProcessor;
+import com.gjie.kgboot.api.strategy.http.RespProcessorFactory;
 import com.gjie.kgboot.common.constant.ErrorEnum;
 import com.gjie.kgboot.common.exception.BaseException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 
-@Service
 public class HttpApiClient {
-    @Autowired
+
+    public HttpApiClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     private RestTemplate restTemplate;
 
-
-    private static Logger logger = LogManager.getLogger(HttpApiClient.class);
+    private static Logger logger = LogManager.getLogger("HTTP_API_LOG");
 
     public HttpBaseResponse getHttpResponse(HttpBaseRequest request) {
         String url = buildUrl(request.getUrl(), request.getUrlVariables());
@@ -45,7 +45,7 @@ public class HttpApiClient {
         //策略直接解析
         AbstractRespProcessor respProcessor = RespProcessorFactory.getRespProcessor(request.getAnalysisRespCode());
         if (respProcessor == null) {
-            throw  new BaseException(ErrorEnum.NO_EXISTS_HTTP_RESP_PROCESSOR);
+            throw new BaseException(ErrorEnum.NO_EXISTS_HTTP_RESP_PROCESSOR);
         }
         HttpBaseResponse httpBaseResponse = respProcessor.analysisResp(body);
         return httpBaseResponse;

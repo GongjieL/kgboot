@@ -1,3 +1,12 @@
+# 说明
+- 1、引用该starter的配置均为kgboot开头 
+- 2、kgboot.enable.http(/kafka/rabbit/redis确认是否开启功能)
+- 3、kgboot.api.trace-id-key 配置traceId的关键字，比如traceId，便于跟踪日志
+- 4、kgboot.kafka.consumer.topics 配置多个topic监听，继承AbstractKafkaConsumerProcessor完成自己的消费
+
+
+
+# kafka命令
 ## 机器创建集群
 ### 创建zk
 <pre><code>docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper

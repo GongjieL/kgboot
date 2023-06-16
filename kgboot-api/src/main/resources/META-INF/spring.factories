@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.gjie.kgboot.api.config.HttpApiConfig,\
+  com.gjie.kgboot.api.config.KafkaConfig
