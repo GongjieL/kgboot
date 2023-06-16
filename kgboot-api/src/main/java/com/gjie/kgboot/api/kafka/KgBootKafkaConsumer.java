@@ -18,8 +18,8 @@ public class KgBootKafkaConsumer {
     private KafkaClientProperties kafkaClientProperties;
     private static Logger logger = LogManager.getLogger("KAFKA_API_LOG");
 
-    @KafkaListener(id = "consumerRecord", topics = "#{'${kgboot.kafka.consumer.topics}'.split(',')}", containerFactory = "kafkaListenerContainerFactory")
-    public void consumerBatch(List<ConsumerRecord> records,  Consumer consumer) {
+    @KafkaListener(topics = "#{'${kgboot.kafka.consumer.topics}'.split(',')}", containerFactory = "kafkaListenerContainerFactory")
+    public void consumerBatch(List<ConsumerRecord> records, Consumer consumer) {
         for (ConsumerRecord record : records) {
             AbstractKafkaConsumerProcessor consumerProcessor =
                     KafkaTopicProcessorFactory.getConsumerProcessor(record.topic());

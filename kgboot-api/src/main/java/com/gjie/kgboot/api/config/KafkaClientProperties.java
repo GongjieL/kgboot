@@ -2,8 +2,6 @@ package com.gjie.kgboot.api.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.List;
-
 @ConfigurationProperties(prefix = "kgboot.kafka")
 public class KafkaClientProperties {
     //-----生产者----
@@ -116,11 +114,6 @@ public class KafkaClientProperties {
      */
     private String interceptorClasses;
 
-    /**
-     * 监听的kafka topic
-     * @return
-     */
-    private List<String> consumerTopics;
 
     /**
      * 消费者线程
@@ -134,14 +127,6 @@ public class KafkaClientProperties {
 
     public void setConsumerThreadNum(Integer consumerThreadNum) {
         this.consumerThreadNum = consumerThreadNum;
-    }
-
-    public List<String> getConsumerTopics() {
-        return consumerTopics;
-    }
-
-    public void setConsumerTopics(List<String> consumerTopics) {
-        this.consumerTopics = consumerTopics;
     }
 
     public String getBootstrapServers() {
