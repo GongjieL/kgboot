@@ -1,4 +1,4 @@
-package com.gjie.kgboot.api.http;
+package com.gjie.kgboot.api.client.http;
 
 public class HttpBaseResponse<T> {
     /**

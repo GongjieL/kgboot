@@ -1,6 +1,6 @@
 package com.gjie.kgboot.api.config;
 
-import com.gjie.kgboot.api.http.HttpApiClient;
+import com.gjie.kgboot.api.client.http.HttpApiClient;
 import com.gjie.kgboot.api.strategy.http.CommonRespProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

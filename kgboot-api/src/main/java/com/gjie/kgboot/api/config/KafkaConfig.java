@@ -1,7 +1,7 @@
 package com.gjie.kgboot.api.config;
 
-import com.gjie.kgboot.api.kafka.KafkaProducerClient;
-import com.gjie.kgboot.api.kafka.KgBootKafkaConsumer;
+import com.gjie.kgboot.api.client.kafka.KafkaProducerClient;
+import com.gjie.kgboot.api.client.kafka.KgBootKafkaConsumer;
 import com.gjie.kgboot.api.strategy.kafka.CommonKafkaConsumerProcessor;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -23,7 +23,6 @@ import org.springframework.kafka.listener.ListenerExecutionFailedException;
 import org.springframework.messaging.Message;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Configuration

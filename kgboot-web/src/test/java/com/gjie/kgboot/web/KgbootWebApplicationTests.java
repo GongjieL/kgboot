@@ -1,7 +1,7 @@
 package com.gjie.kgboot.web;
 
-import com.gjie.kgboot.api.http.HttpApiClient;
-import com.gjie.kgboot.api.kafka.KafkaProducerClient;
+import com.gjie.kgboot.api.client.http.HttpApiClient;
+import com.gjie.kgboot.api.client.kafka.KafkaProducerClient;
 import com.gjie.kgboot.dao.service.impl.OperateLogServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

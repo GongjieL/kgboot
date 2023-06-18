@@ -2,7 +2,7 @@ package com.gjie.kgboot.api.strategy.http;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.gjie.kgboot.api.http.HttpBaseResponse;
+import com.gjie.kgboot.api.client.http.HttpBaseResponse;
 
 public class CommonRespProcessor extends AbstractRespProcessor<String> {
     @Override

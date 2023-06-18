@@ -1,4 +1,4 @@
-package com.gjie.kgboot.api.http;
+package com.gjie.kgboot.api.client.http;
 
 import com.alibaba.fastjson.JSON;
 import com.gjie.kgboot.api.strategy.http.AbstractRespProcessor;

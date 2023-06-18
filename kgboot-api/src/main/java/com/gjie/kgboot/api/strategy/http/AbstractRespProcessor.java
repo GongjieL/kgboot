@@ -1,6 +1,6 @@
 package com.gjie.kgboot.api.strategy.http;
 
-import com.gjie.kgboot.api.http.HttpBaseResponse;
+import com.gjie.kgboot.api.client.http.HttpBaseResponse;
 import org.springframework.beans.factory.InitializingBean;
 
 public abstract class AbstractRespProcessor<T> implements InitializingBean {
