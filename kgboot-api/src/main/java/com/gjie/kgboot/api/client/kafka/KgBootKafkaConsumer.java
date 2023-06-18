@@ -1,6 +1,6 @@
 package com.gjie.kgboot.api.client.kafka;
 
-import com.gjie.kgboot.api.config.KafkaClientProperties;
+import com.gjie.kgboot.api.config.kafka.KafkaClientProperties;
 import com.gjie.kgboot.api.strategy.kafka.AbstractKafkaConsumerProcessor;
 import com.gjie.kgboot.api.strategy.kafka.KafkaTopicProcessorFactory;
 import org.apache.commons.lang3.StringUtils;

@@ -1,6 +1,6 @@
 package com.gjie.kgboot.api.strategy.kafka;
 
-import com.gjie.kgboot.api.config.KafkaClientProperties;
+import com.gjie.kgboot.api.config.kafka.KafkaClientProperties;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;

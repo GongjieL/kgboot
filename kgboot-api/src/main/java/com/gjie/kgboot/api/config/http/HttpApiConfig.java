@@ -1,4 +1,4 @@
-package com.gjie.kgboot.api.config;
+package com.gjie.kgboot.api.config.http;
 
 import com.gjie.kgboot.api.client.http.HttpApiClient;
 import com.gjie.kgboot.api.strategy.http.CommonRespProcessor;

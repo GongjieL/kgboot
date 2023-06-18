@@ -1,4 +1,4 @@
-package com.gjie.kgboot.api.config;
+package com.gjie.kgboot.api.config.kafka;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

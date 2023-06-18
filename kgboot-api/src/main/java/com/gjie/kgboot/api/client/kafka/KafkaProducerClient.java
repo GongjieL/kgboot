@@ -1,7 +1,6 @@
 package com.gjie.kgboot.api.client.kafka;
 
 import com.gjie.kgboot.api.config.APICommonProperties;
-import com.gjie.kgboot.api.config.KafkaClientProperties;
 import com.gjie.kgboot.common.constant.CommonConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
