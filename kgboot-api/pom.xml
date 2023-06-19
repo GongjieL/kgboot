@@ -58,6 +58,11 @@
             <groupId>com.gjie</groupId>
             <artifactId>kgboot-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.gjie</groupId>
+            <artifactId>kgboot-util</artifactId>
+        </dependency>
     </dependencies>
 
 
