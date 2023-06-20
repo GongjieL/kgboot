@@ -50,12 +50,22 @@ public class KgBootRedisClient {
 //    }
 
     /**
+     * 淘汰缓存
+     *
+     * @param key
+     * @return
+     */
+    public ListenableFuture<CacheExecuteResult> eliminateCache(String key) {
+        return eliminateCache(key, true, null);
+    }
+
+    /**
      * 缓存删除重试
      *
      * @param key
      * @param future
      */
-    private void retryEliminateCache(String key, SettableListenableFuture<CacheExecuteResult> future, Boolean isFirstExec) {
+    private void retryEliminateCache(String key, SettableListenableFuture<CacheExecuteResult> future) {
         //执行方法
         Function<String, Boolean> function = new Function<String, Boolean>() {
             @Override
@@ -83,10 +93,6 @@ public class KgBootRedisClient {
     }
 
 
-    public ListenableFuture<CacheExecuteResult> eliminateCache(String key) {
-        return eliminateCache(key, true, null);
-    }
-
     private ListenableFuture<CacheExecuteResult> eliminateCache(String key, Boolean firstDel,
                                                                 SettableListenableFuture<CacheExecuteResult> future) {
         if (future == null) {
@@ -106,7 +112,7 @@ public class KgBootRedisClient {
             @Override
             public void onFailure(Throwable ex) {
                 //失败重试
-                retryEliminateCache(key, finalFuture, firstDel);
+                retryEliminateCache(key, finalFuture);
                 //第一次直接返回
                 if (firstDel) {
                     return;
