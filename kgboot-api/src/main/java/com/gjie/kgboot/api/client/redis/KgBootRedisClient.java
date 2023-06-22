@@ -24,10 +24,18 @@ public class KgBootRedisClient {
         this.delayDeleteTime = delayDeleteTime;
     }
 
-    @Autowired
+    public void testSome(String key) {
+        redisTemplate.delete(key);
+        System.out.println(1);
+    }
+
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
-//    {
+    public void setThreadPoolTaskExecutor(ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+        this.threadPoolTaskExecutor = threadPoolTaskExecutor;
+    }
+
+    //    {
 //        threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
 //        threadPoolTaskExecutor.initialize();
 //    }
