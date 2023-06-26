@@ -71,6 +71,7 @@ public class WebControllerAspect {
 
             return (BaseWebResponse) proceedingJoinPoint.proceed();
         } catch (Throwable t) {
+            t.printStackTrace();
             logger.error("访问接口失败,入参:" + JSON.toJSONString(proceedingJoinPoint.getArgs()), t);
             if (t instanceof BaseException) {
                 throw (BaseException) t;

@@ -1,5 +1,6 @@
 package com.gjie.kgboot.dao.service.impl;
 
+//import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gjie.kgboot.dao.domain.OperateLog;
 import com.gjie.kgboot.dao.service.OperateLogService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2023-06-12 22:16:11
 */
 @Service
+//@DS("wx")
 public class OperateLogServiceImpl extends ServiceImpl<OperateLogMapper, OperateLog>
     implements OperateLogService{
         public String test(){

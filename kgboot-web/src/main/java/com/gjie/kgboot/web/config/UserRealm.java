@@ -32,9 +32,7 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         System.out.println("执行了=>认证doGetAuthorizationInfo");
-
         UsernamePasswordToken userToken = (UsernamePasswordToken) token;
-
         //连接真实数据库
         //假装获取用户
         User user = new User();

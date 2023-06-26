@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gjie.kgboot.dao.mapper.boot.KgbootSessionMapper">
+
+    <resultMap id="BaseResultMap" type="com.gjie.kgboot.dao.domain.KgbootSession">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="sessionId" column="session_id" jdbcType="VARCHAR"/>
+            <result property="sessionData" column="session_data" jdbcType="VARCHAR"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,session_id,session_data,
+        created_at,updated_at
+    </sql>
+</mapper>

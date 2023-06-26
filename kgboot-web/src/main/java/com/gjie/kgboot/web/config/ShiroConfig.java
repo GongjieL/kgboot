@@ -1,6 +1,8 @@
 package com.gjie.kgboot.web.config;
 
 
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -109,6 +111,27 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(getdefaultWebSecurityManager(userRealm));
         return authorizationAttributeSourceAdvisor;
     }
+
+
+//    @Bean("sqlSessionFactory")
+//    public SqlSessionFactory sqlSessionFactory() throws Exception {
+//        MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
+//        sqlSessionFactory.setDataSource(multipleDataSource(db1(), db2()));
+//        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*.xml"));
+//
+//        MybatisConfiguration configuration = new MybatisConfiguration();
+//        configuration.setJdbcTypeForNull(JdbcType.NULL);
+//        configuration.setMapUnderscoreToCamelCase(true);
+//        configuration.setCacheEnabled(false);
+//        sqlSessionFactory.setConfiguration(configuration);
+//        //PerformanceInterceptor(),OptimisticLockerInterceptor()
+//        //添加分页功能
+//        sqlSessionFactory.setPlugins(new Interceptor[]{
+//                paginationInterceptor()
+//        });
+////        sqlSessionFactory.setGlobalConfig(globalConfiguration()); //注释掉全局配置，因为在xml中读取就是全局配置
+//        return sqlSessionFactory.getObject();
+//    }
 
 
 

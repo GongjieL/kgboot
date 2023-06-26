@@ -5,6 +5,8 @@ import com.gjie.kgboot.api.client.http.HttpBaseRequest;
 import com.gjie.kgboot.api.client.http.HttpBaseResponse;
 import com.gjie.kgboot.api.client.redis.CacheExecuteResult;
 import com.gjie.kgboot.api.client.redis.KgBootRedisClient;
+import com.gjie.kgboot.dao.mapper.boot.KgbootSessionMapper;
+import com.gjie.kgboot.dao.service.KgbootSessionService;
 import com.gjie.kgboot.dao.service.OperateLogService;
 import com.gjie.kgboot.dao.service.impl.OperateLogServiceImpl;
 import com.gjie.kgboot.web.response.BaseWebResponse;
@@ -35,6 +37,9 @@ public class TestController {
 //    private KafkaProducerClient kafkaProducerClient;
 
     @Resource
+    private KgbootSessionService kgbootSessionService;
+
+    @Resource
     private OperateLogService operateLogService;
 
     @Resource(name = "stringRedisTemplate")
@@ -43,10 +48,14 @@ public class TestController {
     @Autowired
     private KgBootRedisClient kgBootRedisClient;
 
+    @Autowired
+    private KgbootSessionMapper kgbootSessionMapper;
+
 
     @GetMapping(value = "/abc")
     public BaseWebResponse<String> test(@RequestParam String abc) {
         Subject subject = SecurityUtils.getSubject();
+        kgbootSessionService.list();
         UsernamePasswordToken token = new UsernamePasswordToken("zhangsan", "123456");
         subject.login(token);
         System.out.println(1);
