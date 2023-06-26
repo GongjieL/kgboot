@@ -8,6 +8,7 @@ import com.gjie.kgboot.api.client.redis.KgBootRedisClient;
 import com.gjie.kgboot.dao.mapper.boot.KgbootSessionMapper;
 import com.gjie.kgboot.dao.service.KgbootSessionService;
 import com.gjie.kgboot.dao.service.OperateLogService;
+import com.gjie.kgboot.dao.service.impl.KgbootSessionServiceImpl;
 import com.gjie.kgboot.dao.service.impl.OperateLogServiceImpl;
 import com.gjie.kgboot.web.response.BaseWebResponse;
 import org.apache.shiro.SecurityUtils;
@@ -36,8 +37,8 @@ public class TestController {
 //    @Autowired
 //    private KafkaProducerClient kafkaProducerClient;
 
-    @Resource
-    private KgbootSessionService kgbootSessionService;
+    @Autowired
+    private KgbootSessionServiceImpl kgbootSessionService;
 
     @Resource
     private OperateLogService operateLogService;
