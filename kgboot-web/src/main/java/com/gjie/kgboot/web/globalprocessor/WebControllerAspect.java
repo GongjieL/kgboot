@@ -4,10 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.gjie.kgboot.common.constant.ErrorEnum;
 import com.gjie.kgboot.common.exception.BaseException;
 import com.gjie.kgboot.web.response.BaseWebResponse;
-import com.sun.xml.internal.ws.client.ResponseContext;
-import com.sun.xml.internal.ws.client.ResponseContextReceiver;
-import org.apache.catalina.session.StandardSession;
-import org.apache.catalina.session.StandardSessionFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,12 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 @Component

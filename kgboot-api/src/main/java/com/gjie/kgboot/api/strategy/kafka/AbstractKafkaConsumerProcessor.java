@@ -1,24 +1,23 @@
 package com.gjie.kgboot.api.strategy.kafka;
 
-import com.gjie.kgboot.api.config.kafka.KafkaClientProperties;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.clients.consumer.OffsetCommitCallback;
 import org.apache.kafka.common.TopicPartition;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 public abstract class AbstractKafkaConsumerProcessor<Resp, K, V> implements InitializingBean {
 
 
-    @Resource
-    private KafkaClientProperties kafkaClientProperties;
-
     public abstract String topic();
 
+
+    @Value("${spring.kafka.consumer.enable-auto-commit:true}")
+    private Boolean autoCommit;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -27,6 +26,7 @@ public abstract class AbstractKafkaConsumerProcessor<Resp, K, V> implements Init
 
     /**
      * 具体消费逻辑
+     *
      * @param consumerRecord
      * @return
      */
@@ -35,10 +35,13 @@ public abstract class AbstractKafkaConsumerProcessor<Resp, K, V> implements Init
     protected abstract void postCommit(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception);
 
     public void consumerMessage(ConsumerRecord record, Consumer consumer) {
+
         preCommit(record);
-        //提交位移
-        if (kafkaClientProperties.getEnableAutoCommit() == null ?
-                false : !kafkaClientProperties.getEnableAutoCommit()) {
+        if (!autoCommit) {
+            if (record.offset() % 2 == 0) {
+                return;
+            }
+            //提交位移
             consumer.commitAsync(new OffsetCommitCallback() {
                 @Override
                 public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {

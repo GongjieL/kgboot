@@ -10,4 +10,11 @@ public class CommonConstants {
      * 请求头跟踪id名。
      */
     public static final String HTTP_HEADER_TRACE_ID = "app_trace_id";
+
+    /**
+     * rabbit默认处理类型
+     */
+    public static final String RABBIT_EXCHANGE_DEFAULT = "default";
+
+
 }

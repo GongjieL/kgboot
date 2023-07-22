@@ -5,9 +5,11 @@ import com.gjie.kgboot.common.constant.CommonConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.slf4j.MDC;
+import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.core.KafkaOperations;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
@@ -16,6 +18,7 @@ import javax.annotation.Resource;
 /**
  * kafka发送消息客户端
  */
+@Service
 public class KafkaProducerClient {
 
     private static Logger logger = LogManager.getLogger("KAFKA_API_LOG");
@@ -36,6 +39,8 @@ public class KafkaProducerClient {
      * @param message 消息内容
      */
     public void sendMessageAsync(String topic, Integer partition, String partitionKey, String message) {
+        //topic的创建交给管理后台，
+        // 此处自动创建topic无partition和replica
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, partition, partitionKey, message);
         //获取traceId
         String traceIdKey = apiCommonProperties.getTraceIdKey() == null ?
