@@ -1,7 +1,5 @@
-package com.gjie.kgboot.api.config.rabbitmq;
+package com.gjie.kgboot.api.config.mq.rabbitmq;
 
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

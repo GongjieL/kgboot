@@ -1,4 +1,4 @@
-package com.gjie.kgboot.api.bo.msg;
+package com.gjie.kgboot.api.bo.mq;
 
 public class RabbitMqSendRespInfo {
     private String msgType;

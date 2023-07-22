@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.gjie.kgboot.api.config.http.HttpApiConfig,\
-  com.gjie.kgboot.api.config.kafka.KafkaConfig,\
+  com.gjie.kgboot.api.config.mq.kafka.KafkaConfig,\
+  com.gjie.kgboot.api.config.mq.rabbitmq.RabbitmqConfig,\
   com.gjie.kgboot.api.config.redis.KgBootRedisConfig

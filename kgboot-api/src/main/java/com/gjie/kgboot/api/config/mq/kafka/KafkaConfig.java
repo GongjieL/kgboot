@@ -1,4 +1,4 @@
-package com.gjie.kgboot.api.config.kafka;
+package com.gjie.kgboot.api.config.mq.kafka;
 
 import com.gjie.kgboot.api.client.mq.kafka.KgBootKafkaConsumer;
 import com.gjie.kgboot.api.config.APICommonProperties;
